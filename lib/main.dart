@@ -51,7 +51,16 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(_dateFormat.format(dateTime)),
-            Text(_timeFormat.format(dateTime)),
+            StreamBuilder(
+              stream: Stream.periodic(const Duration(seconds: 1)),
+              builder: ((context, snapshot) {
+                return Center(
+                  child: Text(
+                    DateFormat('hh:mm:ss').format(DateTime.now()),
+                  ),
+                );
+              }),
+            ),
           ],
         ),
       ),
